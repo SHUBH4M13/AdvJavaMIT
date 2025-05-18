@@ -1,0 +1,76 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class SimpleInterestCalculator extends JFrame {
+
+    private JTextField principalField, rateField, timeField, resultField;
+    private JButton calculateButton, clearButton;
+
+    public SimpleInterestCalculator() {
+        setTitle("Simple Interest Calculator");
+        setSize(400, 300);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setLocationRelativeTo(null); // Center the window
+
+        // Create components
+        JLabel principalLabel = new JLabel("Principal (P):");
+        JLabel rateLabel = new JLabel("Rate of Interest (R):");
+        JLabel timeLabel = new JLabel("Time (T in years):");
+        JLabel resultLabel = new JLabel("Simple Interest (SI):");
+
+        principalField = new JTextField();
+        rateField = new JTextField();
+        timeField = new JTextField();
+        resultField = new JTextField();
+        resultField.setEditable(false);
+
+        calculateButton = new JButton("Calculate");
+        clearButton = new JButton("Clear");
+
+        // Set layout
+        setLayout(new GridLayout(5, 2, 10, 10));
+
+        // Add components to the frame
+        add(principalLabel);
+        add(principalField);
+        add(rateLabel);
+        add(rateField);
+        add(timeLabel);
+        add(timeField);
+        add(resultLabel);
+        add(resultField);
+        add(calculateButton);
+        add(clearButton);
+
+        // Action listener for Calculate button
+        calculateButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    double P = Double.parseDouble(principalField.getText());
+                    double R = Double.parseDouble(rateField.getText());
+                    double T = Double.parseDouble(timeField.getText());
+
+                    double SI = (P * R * T) / 100;
+                    resultField.setText(String.format("%.2f", SI));
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(null, "Please enter valid numeric values.");
+                }
+            }
+        });
+
+        // Action listener for Clear button
+        clearButton.addActionListener(e -> {
+            principalField.setText("");
+            rateField.setText("");
+            timeField.setText("");
+            resultField.setText("");
+        });
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            new SimpleInterestCalculator().setVisible(true);
+        });
+    }
+}
