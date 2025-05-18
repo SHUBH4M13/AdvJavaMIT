@@ -1,0 +1,62 @@
+package org.example.hellowordfx;
+
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
+public class CalculatorApp extends Application {
+    @Override
+    public void start(Stage primaryStage) {
+        TextField num1Field = new TextField();
+        num1Field.setPromptText("Enter first number");
+
+        TextField num2Field = new TextField();
+        num2Field.setPromptText("Enter second number");
+
+        Label resultLabel = new Label();
+
+        Button addButton = new Button("Add");
+        Button subtractButton = new Button("Subtract");
+        Button multiplyButton = new Button("Multiply");
+        Button divideButton = new Button("Divide");
+
+        addButton.setOnAction(e -> {
+            double result = Double.parseDouble(num1Field.getText()) + Double.parseDouble(num2Field.getText());
+            resultLabel.setText("Result: " + result);
+        });
+
+        subtractButton.setOnAction(e -> {
+            double result = Double.parseDouble(num1Field.getText()) - Double.parseDouble(num2Field.getText());
+            resultLabel.setText("Result: " + result);
+        });
+
+        multiplyButton.setOnAction(e -> {
+            double result = Double.parseDouble(num1Field.getText()) * Double.parseDouble(num2Field.getText());
+            resultLabel.setText("Result: " + result);
+        });
+
+        divideButton.setOnAction(e -> {
+            double num2 = Double.parseDouble(num2Field.getText());
+            if (num2 == 0) {
+                resultLabel.setText("Error: Division by zero");
+            } else {
+                double result = Double.parseDouble(num1Field.getText()) / num2;
+                resultLabel.setText("Result: " + result);
+            }
+        });
+
+        VBox vbox = new VBox(10, num1Field, num2Field, addButton, subtractButton, multiplyButton, divideButton, resultLabel);
+        vbox.setStyle("-fx-padding: 20; -fx-alignment: center;");
+
+        Scene scene = new Scene(vbox, 300, 300);
+        primaryStage.setTitle("JavaFX Calculator");
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+}
