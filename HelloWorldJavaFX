@@ -1,0 +1,38 @@
+package org.example.hellowordfx;
+
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
+import java.io.IOException;
+
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
+public class HelloJavaFX extends Application {
+    @Override
+    public void start(Stage primaryStage) {
+        Label helloLabel = new Label("Hello, JavaFX!");
+        String javaVersion = System.getProperty("java.version");
+        String javafxVersion = System.getProperty("javafx.version", "Not found");
+
+        Label javaLabel = new Label("Java Version: " + javaVersion);
+        Label fxLabel = new Label("JavaFX Version: " + javafxVersion);
+
+        VBox vbox = new VBox(10, helloLabel, javaLabel, fxLabel);
+        vbox.setStyle("-fx-padding: 20; -fx-alignment: center;");
+
+        Scene scene = new Scene(vbox, 300, 150);
+        primaryStage.setTitle("JavaFX Greeting");
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+}
